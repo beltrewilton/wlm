@@ -1,14 +1,8 @@
 import os
-import sys
-
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 import uvicorn
-import time
-
 import server.core.app_main as core
-
 
 base_path = os.getcwd()
 key_pem = os.getcwd() + '/certs/key.pem'

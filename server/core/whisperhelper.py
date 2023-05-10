@@ -1,15 +1,13 @@
-import os
 import base64
 from tempfile import NamedTemporaryFile
-
 from whispercpp import Whisper
 from pydub import AudioSegment
+from server.core.path_config import WHISPER_PATH
 
-WHISPER_PATH: str = '/Users/beltre.wilton/apps/whisper.cpp/models/ggml-base.en.bin'
 w = Whisper.from_pretrained(WHISPER_PATH)
 
 
-def transcribe_helper(raw):
+def audio_to_text(raw):
     try:
         wavdec: bytes = base64.b64decode(raw)
         sound_file = NamedTemporaryFile(mode="wb")

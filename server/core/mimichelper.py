@@ -1,17 +1,18 @@
-import sys
-import os
 from tempfile import NamedTemporaryFile
 import base64
-from pydub import AudioSegment
 from mycroft_plugin_tts_mimic3 import Mimic3TTSPlugin
-
-MIMIC_VOICE_PATH: str = '/Users/beltre.wilton/.local/share/mycroft/mimic3/voices/en_US'
+from server.core.path_config import MIMIC_VOICE_PATH
 
 
 def audio_to_base64(file_path):
-    # audio_file = AudioSegment.from_file(file_path)
-    base64_audio: str = base64.b64encode(open(file_path, "rb").read())
-    return base64_audio
+    try:
+        with open(file_path, "rb") as fp:
+            base64_audio: str = base64.b64encode(fp.read())
+        return base64_audio
+    except Exception as ex:
+        print(ex)
+    finally:
+        fp.close()
 
 
 def text_to_audio(llm_response, voice_base: str):
