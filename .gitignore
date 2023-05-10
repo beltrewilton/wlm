@@ -3,3 +3,5 @@
 /server/certs/public.crt
 /client/node_modules/
 /.idea
+/server/certs/key.pem
+/server/certs/public.crt
