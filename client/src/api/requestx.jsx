@@ -44,7 +44,7 @@ export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
         axios.request(get_options_llama(trs)).then(function (response) {
             const {text, base64_audio} = response.data
             const url = `data:audio/wav;base64,${base64_audio}`
-            // setMimicAudio(url)
+            setMimicAudio(url)
             const sound = new Audio(url)
             sound.onplay = () => {
                 document.querySelector('.bl').style.setProperty('--animate-glow', '0.5s')
