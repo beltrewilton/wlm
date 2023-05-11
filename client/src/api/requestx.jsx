@@ -4,6 +4,7 @@ import { letme } from "../util/please_wait_base64";
 
 
 export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
+    const HOST = document.location.href
     const _uuid = uuid()
     const msg = {
         'wavBuffer': wavBuffer
@@ -11,7 +12,7 @@ export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
 
     const options_trs = {
         method: 'POST',
-        url: `https://localhost:8770/core/transcribe_audio/${_uuid}`,
+        url: `${HOST}/core/transcribe_audio/${_uuid}`,
         headers: {
             'Content-Type': 'application/json',
         },
@@ -25,7 +26,7 @@ export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
         }
         const options_llama = {
             method: 'POST',
-            url: `https://localhost:8770/core/hit_llama/${_uuid}`,
+            url: `${HOST}/core/hit_llama/${_uuid}`,
             headers: {
                 'Content-Type': 'application/json',
             },
