@@ -36,8 +36,8 @@ export const App = () => {
           {vad.listening && "ON"}
           {!vad.listening && "OFF"}
         </button>
+        [Voice]
         <select className="select-voice" onChange={OnChangeVoice}>
-              <option disabled selected value> -- select a voice -- </option>
               <option value="cmu-arctic_low">cmu-arctic_low</option>
               <option value="vctk_low">vctk_low</option>
               <option value="hifi-tts_low">hifi-tts_low</option>
