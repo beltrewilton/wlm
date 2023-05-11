@@ -7,3 +7,9 @@
 /server/certs/public.crt
 /server/build/
 /client/build/
+/client/ort-wasm-simd-threaded.wasm
+/client/ort-wasm-simd.wasm
+/client/ort-wasm-threaded.wasm
+/client/ort-wasm.wasm
+/client/silero_vad.onnx
+/client/vad.worklet.bundle.min.js
