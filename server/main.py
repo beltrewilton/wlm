@@ -39,7 +39,6 @@ async def whereiam():
     s: str = 'Google Colab.' if IN_COLAB else 'your poor machine.'
     return {'you': f'Are in {s}'}
 
-print(f'############## WHATS HAPPEN {IN_COLAB} #################')
 
 if IN_COLAB == "True":
     # Google Colab version.
