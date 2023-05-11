@@ -36,8 +36,8 @@ async def root():
 
 @app.get('/whereiam')
 async def whereiam():
-    s: str = 'Google Colab.' if IN_COLAB else 'your poor machine.'
-    return {'you': f'Are in {s}'}
+    s: str = 'Google Colab' if IN_COLAB else 'your poor machine'
+    return {'you': f'Are in {s} baby'}
 
 
 if IN_COLAB == "True":

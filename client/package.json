@@ -1,7 +1,7 @@
 {
   "main": "index.js",
   "scripts": {
-    "start": "snowpack  dev --port 8300 --secure",
+    "start": "snowpack  dev --port 8300",
     "build": "snowpack build",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1"
   },
