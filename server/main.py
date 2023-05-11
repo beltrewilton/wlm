@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import server.core.app_main as core
 
-IN_COLAB = 'google.colab' in sys.modules
+IN_COLAB = os.getenv('IN_COLAB')
 APP_PORT: int = 8770
 
 base_path = os.getcwd()
