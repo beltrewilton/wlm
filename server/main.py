@@ -15,9 +15,6 @@ public_pem = os.getcwd() + '/certs/public.crt'
 
 
 app = FastAPI(ssl_keyfile=key_pem, ssl_certfile=public_pem)
-
-app.mount("/", StaticFiles(directory="./client/build", html=True), name="build")
-
 app.include_router(core.router)
 
 
@@ -33,10 +30,9 @@ async def whereiam():
 
 
 origins = [
-    "https://10.0.0.6:8300",
-    "https://localhost:8300",
+    f"https://10.0.0.6:{APP_PORT}",
+    f"https://localhost:{APP_PORT}",
 ]
-
 
 if IN_COLAB == "True":
     # Google Colab version.
@@ -52,16 +48,16 @@ if IN_COLAB == "True":
     origins = [
         ngrok_tunnel.public_url,
     ]
-
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=origins,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
 else:
     if __name__ == "__main__":
         uvicorn.run(app, host="0.0.0.0", port=APP_PORT, ssl_keyfile=key_pem, ssl_certfile=public_pem)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
+app.mount("/", StaticFiles(directory="./client/build", html=True), name="build")
