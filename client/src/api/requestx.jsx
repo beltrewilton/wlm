@@ -12,7 +12,7 @@ export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
 
     const options_trs = {
         method: 'POST',
-        url: `${HOST}/core/transcribe_audio/${_uuid}`,
+        url: `${HOST}core/transcribe_audio/${_uuid}`,
         headers: {
             'Content-Type': 'application/json',
         },
@@ -26,7 +26,7 @@ export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
         }
         const options_llama = {
             method: 'POST',
-            url: `${HOST}/core/hit_llama/${_uuid}`,
+            url: `${HOST}core/hit_llama/${_uuid}`,
             headers: {
                 'Content-Type': 'application/json',
             },
