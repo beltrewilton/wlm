@@ -5,3 +5,5 @@
 /.idea
 /server/certs/key.pem
 /server/certs/public.crt
+/server/build/
+/client/build/
