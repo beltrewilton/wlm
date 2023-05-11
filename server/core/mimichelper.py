@@ -17,11 +17,13 @@ def audio_to_base64(file_path):
 
 def text_to_audio(llm_response, voice_base: str):
     base: str = voice_base
+    dirs = f'{MIMIC_VOICE_PATH}/{base}'.split('#')[0]
+
     try:
         config = {
             'voice': f'en_US/{base}',
             'language': 'en_US',
-            'voices_directories': [f'{MIMIC_VOICE_PATH}/{base}'],
+            'voices_directories': [dirs],
             'voices_url_format': '',
             'speaker': 'male',
             'noise_scale': 0.667,
