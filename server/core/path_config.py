@@ -2,6 +2,7 @@ import sys
 
 IN_COLAB = 'google.colab' in sys.modules
 
+
 if IN_COLAB:
     LLAMA_PATH_MODEL: str = '/content/wlm/models/ggml-model-q4_0.bin'
     WHISPER_PATH: str = '/content/wlm/models/ggml-base.en.bin'

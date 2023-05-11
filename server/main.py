@@ -34,6 +34,11 @@ app.add_middleware(
 async def root():
     return {'message': 'Message from root.'}
 
+@app.get('/whereiam')
+async def whereiam():
+    s: str = 'Google Colab.' if IN_COLAB else 'your poor machine.'
+    return {'you': 'Are in '}
+
 if IN_COLAB:
     # Google Colab version.
     import uvicorn
