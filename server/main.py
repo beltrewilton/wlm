@@ -32,4 +32,14 @@ async def root():
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8770, ssl_keyfile=key_pem, ssl_certfile=public_pem)
+    # uvicorn.run(app, host="0.0.0.0", port=8770, ssl_keyfile=key_pem, ssl_certfile=public_pem)
+
+    # Google Colab version.
+    import uvicorn
+    from pyngrok import ngrok
+    import nest_asyncio
+
+    ngrok_tunnel = ngrok.connect(8770)
+    print('Public URL:', ngrok_tunnel.public_url)
+    nest_asyncio.apply()
+    uvicorn.run(app, port=8770)

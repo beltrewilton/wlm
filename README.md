@@ -12,7 +12,7 @@ may be used for scrap another useful data from others hotels or restaurants.
 
 ## Are you ready for this ?
 - Python 3.10 / Conda / [Conda Miniforge](https://github.com/conda-forge/miniforge) 
-- Create enviroment and activate
+- Create conda environment and activate
   ```shell
     conda create -n wlm-env python=3.10 -y
     conda activate wlm-env
