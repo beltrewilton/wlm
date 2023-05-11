@@ -4,7 +4,7 @@ MIMIC_VOICE_PATH: str = '/content/mimic3-voices/voices/en_US'
 
 # import sys
 #
-# IN_COLAB = 'google.colab' in sys.modules
+# IN_COLAB = bool(os.getenv('IN_COLAB'))
 #
 #
 # if IN_COLAB:
