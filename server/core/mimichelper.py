@@ -10,7 +10,7 @@ def audio_to_base64(file_path):
             base64_audio: str = base64.b64encode(fp.read())
         return base64_audio
     except Exception as ex:
-        print(ex)
+        print('###### ERROR HERE audio_to_base64 ', ex)
     finally:
         fp.close()
 
@@ -34,6 +34,9 @@ def text_to_audio(llm_response, voice_base: str):
         m.get_tts(text, sound_file.name)
         return audio_to_base64(sound_file.name)
     except Exception as ex:
-        print(ex)
+        print('###### ERROR HERE text_to_audio ', ex)
     finally:
-        sound_file.close()
+        try:
+            sound_file.close()
+        except Exception as ex:
+            print(ex)
