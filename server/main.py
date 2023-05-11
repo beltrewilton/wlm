@@ -37,7 +37,9 @@ async def root():
 @app.get('/whereiam')
 async def whereiam():
     s: str = 'Google Colab.' if IN_COLAB else 'your poor machine.'
-    return {'you': 'Are in '}
+    return {'you': f'Are in {s}'}
+
+print(f'############## WHATS HAPPEN {IN_COLAB} #################')
 
 if IN_COLAB:
     # Google Colab version.
@@ -48,7 +50,7 @@ if IN_COLAB:
     ngrok_tunnel = ngrok.connect(APP_PORT)
     print('Public URL:', ngrok_tunnel.public_url)
     nest_asyncio.apply()
-    uvicorn.run(app, port=APP_PORT)
+    # uvicorn.run(app, port=APP_PORT)
 else:
     if __name__ == "__main__":
         uvicorn.run(app, host="0.0.0.0", port=APP_PORT, ssl_keyfile=key_pem, ssl_certfile=public_pem)
