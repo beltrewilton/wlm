@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import server.core.app_main as core
 
-IN_COLAB = bool(os.getenv('IN_COLAB'))
+IN_COLAB = os.getenv('IN_COLAB')
 APP_PORT: int = 8770
 
 base_path = os.getcwd()
@@ -41,7 +41,7 @@ async def whereiam():
 
 print(f'############## WHATS HAPPEN {IN_COLAB} #################')
 
-if IN_COLAB:
+if IN_COLAB == "True":
     # Google Colab version.
     import uvicorn
     from pyngrok import ngrok

@@ -4,10 +4,10 @@ MIMIC_VOICE_PATH: str = '/content/mimic3-voices/voices/en_US'
 
 # import sys
 #
-# IN_COLAB = bool(os.getenv('IN_COLAB'))
+# IN_COLAB = os.getenv('IN_COLAB')
 #
 #
-# if IN_COLAB:
+# if if IN_COLAB == "True":
 #     LLAMA_PATH_MODEL: str = '/content/wlm/models/ggml-model-q4_0.bin'
 #     WHISPER_PATH: str = '/content/wlm/models/ggml-base.en.bin'
 #     MIMIC_VOICE_PATH: str = '/content/mimic3-voices/voices/en_US'
