@@ -38,10 +38,14 @@ export const App = () => {
         </button>
         <select className="select-voice" onChange={OnChangeVoice}>
               <option value="cmu-arctic_low">cmu-arctic_low</option>
+              <option value="cmu-arctic_low#eey">cmu-arctic_low#eey</option>
+              <option value="cmu-arctic_low#bdl">cmu-arctic_low#bdl</option>
+              <option value="cmu-arctic_low">cmu-arctic_low</option>
               <option value="vctk_low">vctk_low</option>
               <option value="hifi-tts_low">hifi-tts_low</option>
               <option value="ljspeech_low">ljspeech_low</option>
               <option value="m-ailabs_low">m-ailabs_low</option>
+              <option value="m-ailabs_low#mary_ann">m-ailabs_low#mary_ann</option>
         </select>
         {vad.listening && <Raindbow prop={{'userSpeaking': vad.userSpeaking}} /> }
      </div>
