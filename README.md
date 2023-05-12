@@ -7,7 +7,8 @@
 This Python class was designed for scraping comments of users of hotels of **Punta Cana**, but not limited,
 may be used for scrap another useful data from others hotels or restaurants. 
 
-![green-palms-raise-up-sky-sunny-beach](img/green-palms-raise-up-sky-sunny-beach.png?raw=true "Title")
+
+<video src='https://github.com/beltrewilton/wlm/raw/main/vid/wlm-demo-vid.MP4' width=180></video>
 
 
 ## Are you ready for this ?
