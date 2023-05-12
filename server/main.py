@@ -1,5 +1,6 @@
 import os
 import sys
+import socket
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,14 +14,8 @@ base_path = os.getcwd()
 key_pem = os.getcwd() + '/certs/key.pem'
 public_pem = os.getcwd() + '/certs/public.crt'
 
-
 app = FastAPI(ssl_keyfile=key_pem, ssl_certfile=public_pem)
 app.include_router(core.router)
-
-
-# @app.get('/')
-# async def root():
-#     return {'message': 'Message from root.'}
 
 
 @app.get('/whereiam')
@@ -29,10 +24,7 @@ async def whereiam():
     return {'you': f'Are in {s} baby'}
 
 
-origins = [
-    f"https://10.0.0.6:{APP_PORT}",
-    f"https://localhost:{APP_PORT}",
-]
+origins: list = []
 
 if IN_COLAB == "True":
     # Google Colab version.
@@ -49,6 +41,24 @@ if IN_COLAB == "True":
         ngrok_tunnel.public_url,
     ]
 else:
+    # Running local.
+    my_lan_ip: str = None
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        my_lan_ip = s.getsockname()[0]
+        print(f'\n###### My Wifi IP ######\n######  {my_lan_ip}  ######\n')
+    except Exception as ex:
+        print(ex)
+    finally:
+        s.close()
+
+    origins = [
+        f"https://{my_lan_ip}:{APP_PORT}",
+        f"https://localhost:{APP_PORT}",
+        f"https://127.0.0.1:{APP_PORT}",
+    ]
+
     if __name__ == "__main__":
         uvicorn.run(app, host="0.0.0.0", port=APP_PORT, ssl_keyfile=key_pem, ssl_certfile=public_pem)
 
