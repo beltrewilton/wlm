@@ -8,7 +8,11 @@ This Python class was designed for scraping comments of users of hotels of **Pun
 may be used for scrap another useful data from others hotels or restaurants. 
 
 
-<video src='https://github.com/beltrewilton/wlm/raw/main/vid/wlm-demo-vid.MP4' width=180></video>
+
+
+https://github.com/beltrewilton/wlm/assets/8779994/af513a62-09df-484d-92a3-ed4a9827a9cb
+
+
 
 
 ## Are you ready for this ?
