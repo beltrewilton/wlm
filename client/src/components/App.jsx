@@ -33,8 +33,8 @@ export const App = () => {
       </div>
      <div className="top">
         <button className="vadbtn" onClick={vad.toggle}>
-          {vad.listening && "ON"}
-          {!vad.listening && "OFF"}
+          {vad.listening && "Listening OFF"}
+          {!vad.listening && "listening ON"}
         </button>
 
        
