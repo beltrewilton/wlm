@@ -12,16 +12,16 @@
 body {
 	background: #343436;
 	font-family: 'Lato';
-    color: #ccc;
+  color: #ccc;
 
-    display: flex;
-    align-items: center;
-    /* font-family: monospace; */
-    justify-content: center;
-    background-color: #1d212b;
+  display: flex;
+  align-items: center;
+  /* font-family: monospace; */
+  justify-content: center;
+  background-color: #1d212b;
 }
 
-body:after {
+/* body:after {
 	position: absolute;
 	width: 0;
 	height: 0;
@@ -29,7 +29,7 @@ body:after {
 	z-index: -1;
 	content: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/163884/play.svg)
 		url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/163884/pause.svg);
-}
+} */
 
 #playlist {
     max-height: 400px;
@@ -92,6 +92,8 @@ body:after {
 
 .head {
     display: flex;
+    gap: 30px;
+    align-items: center;
 }
 .select-voice {
     max-height: 20px;
@@ -169,13 +171,13 @@ body:after {
 
 
 * {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     /* margin: 0; */
   }
 
   
 .rainbow-container {
-    font-size: 8vmin;
+    font-size: 5vmin;
     z-index: 1;
     transform: rotate(0deg) translateZ(0);
     transform-origin: center center;
@@ -355,3 +357,73 @@ body:after {
       border-color: transparent;
     }
   }  
+
+
+  .img-avatar {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  div.radio-with-Icon {
+    display: block;
+  }
+  div.radio-with-Icon p.radioOption-Item {
+    display: inline-block;
+    /* width: 70px;
+    /* height: 50px;  */
+    box-sizing: border-box;
+    margin: 0px 5px 0px 20px;
+    border: none;
+  }
+  div.radio-with-Icon p.radioOption-Item label {
+    display: block;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #847b7b;
+    color: #25648d;
+    cursor: pointer;
+    opacity: .8;
+    transition: none;
+    font-size: 13px;
+    padding-top: 5px;
+    text-align: center;
+    margin: 0 !important;
+  }
+  div.radio-with-Icon p.radioOption-Item label:hover, div.radio-with-Icon p.radioOption-Item label:focus, div.radio-with-Icon p.radioOption-Item label:active {
+    opacity: .5;
+    background-color: #bdbaba;
+    color: #fff;
+    margin: 0 !important;
+  }
+  div.radio-with-Icon p.radioOption-Item label::after, div.radio-with-Icon p.radioOption-Item label:after, div.radio-with-Icon p.radioOption-Item label::before, div.radio-with-Icon p.radioOption-Item label:before {
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+  }
+  div.radio-with-Icon p.radioOption-Item label i.fa {
+    display: block;
+    font-size: 50px;
+  }
+  div.radio-with-Icon p.radioOption-Item input[type="radio"] {
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  div.radio-with-Icon p.radioOption-Item input[type="radio"]:active ~ label {
+    opacity: 1;
+  }
+  div.radio-with-Icon p.radioOption-Item input[type="radio"]:checked ~ label {
+    opacity: 1;
+    border: none;
+    background-color: #158871;
+    color: #fff;
+  }
+  div.radio-with-Icon p.radioOption-Item input[type="radio"]:hover, div.radio-with-Icon p.radioOption-Item input[type="radio"]:focus, div.radio-with-Icon p.radioOption-Item input[type="radio"]:active {
+    margin: 0 !important;
+  }
+  div.radio-with-Icon p.radioOption-Item input[type="radio"] + label:before, div.radio-with-Icon p.radioOption-Item input[type="radio"] + label:after {
+    margin: 0 !important;
+  }

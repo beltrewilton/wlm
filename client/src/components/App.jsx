@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react"
 import { useMicVAD, utils } from "@ricky0123/vad-react"
-import { streamwav } from "../api/requestx"
+import { streamWAV } from "../api/requestx"
 
 import '../../css/style.css'
 
@@ -9,13 +9,13 @@ export const App = () => {
   const [audioList, setAudioList] = useState([])
   const [mimicAudio, setMimicAudio] = useState()
   const [conversation, addConversation] = useState([])
-  const [voice, setVoice] = useState('cmu-arctic_low')
+  const [voice, setVoice] = useState('vctk_low#p236')
 
   const vad = useMicVAD({
     onSpeechEnd: (audio) => {
       const wavBuffer = utils.encodeWAV(audio)
       const base64 = utils.arrayBufferToBase64(wavBuffer)
-      streamwav(base64, addConversation, setMimicAudio, voice)
+      streamWAV(base64, addConversation, setMimicAudio)
       const url = `data:audio/wav;base64,${base64}`
       setAudioList((old) => [url, ...old])
     },
@@ -29,25 +29,84 @@ export const App = () => {
     <div>
       <div className="head">
         <h1>WLM Demo</h1> 
-        
+        {vad.listening && <Raindbow prop={{'userSpeaking': vad.userSpeaking}} /> }
       </div>
      <div className="top">
         <button className="vadbtn" onClick={vad.toggle}>
           {vad.listening && "ON"}
           {!vad.listening && "OFF"}
         </button>
-        <select className="select-voice" onChange={OnChangeVoice}>
-              <option value="cmu-arctic_low">cmu-arctic_low</option>
-              <option value="cmu-arctic_low#eey">cmu-arctic_low#eey</option>
-              <option value="cmu-arctic_low#bdl">cmu-arctic_low#bdl</option>
-              <option value="cmu-arctic_low">cmu-arctic_low</option>
-              <option value="vctk_low">vctk_low</option>
-              <option value="hifi-tts_low">hifi-tts_low</option>
-              <option value="ljspeech_low">ljspeech_low</option>
-              <option value="m-ailabs_low">m-ailabs_low</option>
-              <option value="m-ailabs_low#mary_ann">m-ailabs_low#mary_ann</option>
-        </select>
-        {vad.listening && <Raindbow prop={{'userSpeaking': vad.userSpeaking}} /> }
+
+       
+
+        <div className="radio-with-Icon">
+          <p className="radioOption-Item">
+            <input type="radio" name="voicesTypes" id="voicesTypes1" value="vctk_low#p236" className="select-voice ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false"  />
+            <label for="voicesTypes1">
+              <img src="css/woman1.png" className="img-avatar"/><br/>
+              vctk_low#p236
+            </label>
+          </p>
+
+          <p className="radioOption-Item">
+            <input type="radio" name="voicesTypes" id="voicesTypes2" value="vctk_low#p239" className="select-voice ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false"  />
+            <label for="voicesTypes2">
+            <img src="css/woman2.png" className="img-avatar"/><br/>
+              vctk_low#p239
+            </label>
+          </p>
+          
+          <p className="radioOption-Item">
+            <input type="radio" name="voicesTypes" id="voicesTypes3" value="vctk_low#p283" className="select-voice ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false"  />
+            <label for="voicesTypes3">
+            <img src="css/woman3.png" className="img-avatar"/><br/>
+              vctk_low#p283
+            </label>
+          </p>
+
+          <p className="radioOption-Item">
+            <input type="radio" name="voicesTypes" id="voicesTypes4" value="vctk_low#p330" className="select-voice ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false"  />
+            <label for="voicesTypes4">
+            <img src="css/woman4.png" className="img-avatar"/><br/>
+              vctk_low#p330
+            </label>
+          </p>
+
+          <p className="radioOption-Item">
+            <input type="radio" name="voicesTypes" id="voicesTypes5" value="vctk_low#p276" className="select-voice ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false"  />
+            <label for="voicesTypes5">
+            <img src="css/woman5.png" className="img-avatar"/><br/>
+              vctk_low#p276
+            </label>
+          </p>
+          
+          <p className="radioOption-Item">
+            <input type="radio" name="voicesTypes" id="voicesTypes6" value="vctk_low#p286" className="select-voice ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false"  />
+            <label for="voicesTypes6">
+            <img src="css/man1.png" className="img-avatar"/><br/>
+              vctk_low#p286
+            </label>
+          </p>
+
+          <p className="radioOption-Item">
+            <input type="radio" name="voicesTypes" id="voicesTypes7" value="cmu-arctic_low#bdl" className="select-voice ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false"  />
+            <label for="voicesTypes7">
+            <img src="css/man2.png" className="img-avatar"/><br/>
+             cmu-arctic_low#bdl
+            </label>
+          </p>
+
+          <p className="radioOption-Item">
+            <input type="radio" name="voicesTypes" id="voicesTypes8" value="cmu-arctic_low#ksp" className="select-voice ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false"  />
+            <label for="voicesTypes8">
+            <img src="css/man3.png" className="img-avatar"/><br/>
+             cmu-arctic_low#ksp
+            </label>
+          </p>
+
+        </div>
+
+       
      </div>
       <div className="bl">
         {/* <ol id="playlist">
@@ -80,14 +139,6 @@ export const App = () => {
       </div>
     </div>
   )
-}
-
-const UserSpeaking = () => {
-  return <span style={{ color: "green" }}>user is speaking</span>
-}
-
-const UserNotSpeaking = () => {
-  return <span style={{ color: "red" }}>user is not speaking</span>
 }
 
 const Raindbow = (prop) => {

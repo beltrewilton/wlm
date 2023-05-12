@@ -40,6 +40,13 @@ if IN_COLAB == "True":
     origins = [
         ngrok_tunnel.public_url,
     ]
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 else:
     # Running local.
     my_lan_ip: str = None
@@ -57,17 +64,19 @@ else:
         f"https://{my_lan_ip}:{APP_PORT}",
         f"https://localhost:{APP_PORT}",
         f"https://127.0.0.1:{APP_PORT}",
+        'https://localhost:8300',
     ]
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     if __name__ == "__main__":
         uvicorn.run(app, host="0.0.0.0", port=APP_PORT, ssl_keyfile=key_pem, ssl_certfile=public_pem)
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 app.mount("/", StaticFiles(directory="./client/build", html=True), name="build")

@@ -11,6 +11,6 @@ def call_llama(prompt: str):
             "content": prompt
         }
     ]
-    # result = llm.create_chat_completion(messages=messages)
-    result = llm.create_completion(prompt=prompt)
+    result = llm.create_chat_completion(messages=messages)
+    # result = llm.create_completion(prompt=prompt)
     return result

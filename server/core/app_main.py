@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException, status
 
 from server.core.whisperhelper import audio_to_text
 from server.core.llamahelper import call_llama
-from server.core.mimichelper import text_to_audio
+from server.core.mimichelper import text_to_audio, say_hello
 from server.core.schema import SoundMessage
 from server.core.in_util import DUMMY_BASE64
 
@@ -54,6 +54,6 @@ async def hit_llama(msg: SoundMessage, client_uuid: str):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(ex))
 
 
-@router.get('/pleasewait')
-async def pleasewait():
-    return DUMMY_BASE64
+@router.post('/say_hello')
+async def _say_hello(msg: SoundMessage):
+    return say_hello(voice_base=msg.voice_base)

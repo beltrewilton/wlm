@@ -2,9 +2,10 @@ import axios from "axios";
 import { uuid } from "../util/utils"
 
 
-export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
+export const streamWAV = (wavBuffer, addConversation, setMimicAudio) => {
     let waitaudio;
     const HOST = document.location.href
+    // const HOST = 'https://localhost:8770/'
     const _uuid = uuid()
     const msg = {
         'wavBuffer': wavBuffer
@@ -20,6 +21,15 @@ export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
     }
 
     const get_options_llama = (trs) => {
+        let voice = undefined
+        try {
+            voice = document.querySelector('input[name="voicesTypes"]:checked').value;
+        } catch (e) {
+            voice =  'vctk_low#p236'
+        }
+
+        console.log(voice)
+
         const _data = {
             'transcript': trs,
             'voice_base': voice,
@@ -36,12 +46,25 @@ export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
     }
 
     const pleasewait = () => {
+        let voice = undefined
+        try {
+            voice = document.querySelector('input[name="voicesTypes"]:checked').value;
+        } catch (e) {
+            voice =  'vctk_low#p236'
+        }
+
+        console.log(voice)
+
+        const _data = {
+            'voice_base': voice,
+        }
         const options_dummy = {
-            method: 'GET',
-            url: `${HOST}core/pleasewait`,
+            method: 'POST',
+            url: `${HOST}core/say_hello`,
             headers: {
                 'Content-Type': 'application/json',
-            }
+            },
+            data: _data,
         }
         axios.request(options_dummy).then(function (response) {
             const a = response.data
@@ -55,6 +78,7 @@ export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
 
 
     const request_llama = (trs) => {
+        document.querySelector('.vadbtn').click()
         pleasewait()
 
         axios.request(get_options_llama(trs)).then(function (response) {
@@ -70,12 +94,13 @@ export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
             }
             sound.onended = () => {
                 document.querySelector('.bl').style.setProperty('--animate-glow', '3.5s')
+                document.querySelector('.vadbtn').click()
             }
 
             sound.play()
-
+            
             text.choices.forEach(ch => {
-                addConversation((old) => [{'role': 'llm', 'text': ch.text, 'clz': ''}, ...old])
+                addConversation((old) => [{'role': 'llm', 'text': ch.message.content, 'clz': ''}, ...old])
             })
         }).catch(function (error) {
             console.error(error);
