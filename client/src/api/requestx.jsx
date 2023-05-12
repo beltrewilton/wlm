@@ -1,9 +1,9 @@
 import axios from "axios";
 import { uuid } from "../util/utils"
-import { letme } from "../util/please_wait_base64";
 
 
 export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
+    let waitaudio;
     const HOST = document.location.href
     const _uuid = uuid()
     const msg = {
@@ -35,11 +35,27 @@ export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
         return options_llama
     }
 
+    const pleasewait = () => {
+        const options_dummy = {
+            method: 'GET',
+            url: `${HOST}core/pleasewait`,
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+        axios.request(options_dummy).then(function (response) {
+            const a = response.data
+            const urlx = `data:audio/wav;base64,${a}`
+            waitaudio = new Audio(urlx)
+            waitaudio.play()
+        }).catch(function (error) {
+            console.error(error);
+        })
+    }
+
 
     const request_llama = (trs) => {
-        const urlx = `data:audio/wav;base64,${letme}`
-        const waitaudio = new Audio(urlx)
-        waitaudio.play()
+        pleasewait()
 
         axios.request(get_options_llama(trs)).then(function (response) {
             const {text, base64_audio} = response.data
@@ -48,7 +64,9 @@ export const streamwav = (wavBuffer, addConversation, setMimicAudio, voice) => {
             const sound = new Audio(url)
             sound.onplay = () => {
                 document.querySelector('.bl').style.setProperty('--animate-glow', '0.5s')
-                waitaudio.pause()
+                try {
+                    waitaudio.pause()
+                } catch(e) { }
             }
             sound.onended = () => {
                 document.querySelector('.bl').style.setProperty('--animate-glow', '3.5s')
