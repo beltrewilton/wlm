@@ -37,7 +37,6 @@ async def send_periodically(websocket, manager, client_uuid,  timer, myvar):
             sharable_per_client = await myvar.get('sharable_per_client')
             sharable = [value for value in sharable_per_client if value['client_uuid'] == client_uuid]
             if len(sharable) > 0:    # some info for sent to client_uuid ?
-                print(sharable)
                 await manager.send_personal_message(sharable[0], websocket)
                 # purge sharable client_uuid recently sent.
                 sharable_per_client_copy = [value for value in sharable_per_client if value['client_uuid'] != client_uuid]

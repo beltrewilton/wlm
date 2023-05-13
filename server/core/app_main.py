@@ -32,7 +32,7 @@ async def transcribe_audio(msg: SoundMessage, client_uuid: str):
         trs: str = audio_to_text(msg.wavBuffer)
         end = time.time_ns()
         xtime = end - start
-        print(f'Whisper time: {xtime / S_UNIT}s\n')
+        print(f'\n>> Whisper time: {xtime / S_UNIT}s\n')
         return trs
     except Exception as ex:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(ex))
@@ -45,7 +45,7 @@ async def hit_llama(msg: SoundMessage, client_uuid: str):
         res: str = call_llama(msg.transcript)
         end = time.time_ns()
         xtime = end - start
-        print(f'Llama time: {xtime / S_UNIT}s\n')
+        print(f'\n>> Llama time: {xtime / S_UNIT}s\n')
 
         client_uuid_list = await myvar.get('client_uuid_list')
         out: list = []
@@ -66,7 +66,7 @@ async def hit_llama(msg: SoundMessage, client_uuid: str):
         tta: str = text_to_audio(''.join(out), voice_base=msg.voice_base)
         end = time.time_ns()
         xtime = end - start
-        print(f'Mimic3 time: {xtime / S_UNIT}s\n')
+        print(f'\n>> Mimic3 time: {xtime / S_UNIT}s\n')
 
         return {
             'text': ''.join(out),
