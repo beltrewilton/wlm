@@ -75,11 +75,12 @@ body {
 }
 .human {
     border-left: 8px rgb(114, 189, 239) solid;
-    padding-top: 5px;
-    margin-bottom: 2rem;
+    
 }
 .llm {
     border-left: 8px rgb(206, 121, 230) solid;
+    padding-top: 5px;
+    margin-bottom: 2rem;
 
     /* display: inline-block;
     position: relative; */
@@ -100,9 +101,9 @@ body {
 }
 .bl {
     /* position: relative; */
-    max-height: 400px;
+    max-height: 700px;
     width: 80vw;
-    height: 400px;
+    height: 500px;
     line-height: 2vw;
     /* text-align: center; */
     /* color: #252B37; */
@@ -153,21 +154,22 @@ body {
 .top {
     display: flex;
     min-height: 4rem;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     margin-bottom: 1rem;
     justify-content: space-between;
     align-items: center;
 }
 
-.vadbtn {
+.vadbtn, .voices {
     width: 3.8rem;
     height: 3.8rem;
     border-radius: 50%;
 }
 
-.vadbtn:hover {
+.vadbtn:hover, .voices:hover {
     cursor: pointer;
 }
+
 
 
 * {
@@ -379,14 +381,14 @@ body {
     display: block;
     height: 100%;
     width: 100%;
-    padding: 10px;
+    padding: 2px;
     border-radius: 10px;
     border: 1px solid #847b7b;
     color: #25648d;
     cursor: pointer;
     opacity: .8;
     transition: none;
-    font-size: 13px;
+    font-size: 10px;
     padding-top: 5px;
     text-align: center;
     margin: 0 !important;
@@ -426,4 +428,30 @@ body {
   }
   div.radio-with-Icon p.radioOption-Item input[type="radio"] + label:before, div.radio-with-Icon p.radioOption-Item input[type="radio"] + label:after {
     margin: 0 !important;
+  }
+
+  @media screen and (max-width: 450px) {
+    * {
+      box-sizing: border-box;
+      margin: 1px;
+    }
+    #root {
+      width: 100%;
+    }
+    .bl {
+      line-height: 4vw;
+      width: 100%;
+    }
+    .rainbow-container {
+      font-size: 10vmin;
+    }
+    .display-voices {
+      display: none !important;
+    }
+  }
+
+  @media screen and (min-width: 450px) {
+    .voices {
+      display: none !important;
+    }
   }

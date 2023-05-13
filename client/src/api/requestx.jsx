@@ -1,19 +1,18 @@
 import axios from "axios";
-import { uuid } from "../util/utils"
 
 
-export const streamWAV = (wavBuffer, addConversation, setMimicAudio) => {
+
+export const streamWAV = (wavBuffer, addConversation, setMimicAudio, setStr, __uuid) => {
     let waitaudio;
-    const HOST = document.location.href
-    // const HOST = 'https://localhost:8770/'
-    const _uuid = uuid()
+    // const HOST = document.location.href
+    const HOST = 'https://localhost:8770/'
     const msg = {
         'wavBuffer': wavBuffer
     }
 
     const options_trs = {
         method: 'POST',
-        url: `${HOST}core/transcribe_audio/${_uuid}`,
+        url: `${HOST}core/transcribe_audio/${__uuid}`,
         headers: {
             'Content-Type': 'application/json',
         },
@@ -23,12 +22,12 @@ export const streamWAV = (wavBuffer, addConversation, setMimicAudio) => {
     const get_options_llama = (trs) => {
         let voice = undefined
         try {
-            voice = document.querySelector('input[name="voicesTypes"]:checked').value;
+            voice = document.querySelector('input[name="voicesTypes"]:checked').value
         } catch (e) {
             voice =  'vctk_low#p236'
         }
 
-        console.log(voice)
+        // console.log(voice)
 
         const _data = {
             'transcript': trs,
@@ -36,7 +35,7 @@ export const streamWAV = (wavBuffer, addConversation, setMimicAudio) => {
         }
         const options_llama = {
             method: 'POST',
-            url: `${HOST}core/hit_llama/${_uuid}`,
+            url: `${HOST}core/hit_llama/${__uuid}`,
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -48,7 +47,7 @@ export const streamWAV = (wavBuffer, addConversation, setMimicAudio) => {
     const pleasewait = () => {
         let voice = undefined
         try {
-            voice = document.querySelector('input[name="voicesTypes"]:checked').value;
+            voice = document.querySelector('input[name="voicesTypes"]:checked').value
         } catch (e) {
             voice =  'vctk_low#p236'
         }
@@ -72,14 +71,15 @@ export const streamWAV = (wavBuffer, addConversation, setMimicAudio) => {
             waitaudio = new Audio(urlx)
             waitaudio.play()
         }).catch(function (error) {
-            console.error(error);
+            console.error(error)
         })
     }
 
 
     const request_llama = (trs) => {
+        setStr('> ')
         document.querySelector('.vadbtn').click()
-        pleasewait()
+        // pleasewait()
 
         axios.request(get_options_llama(trs)).then(function (response) {
             const {text, base64_audio} = response.data
@@ -99,20 +99,25 @@ export const streamWAV = (wavBuffer, addConversation, setMimicAudio) => {
 
             sound.play()
             
-            text.choices.forEach(ch => {
-                addConversation((old) => [{'role': 'llm', 'text': ch.message.content, 'clz': ''}, ...old])
-            })
+            // addConversation((old) => [{'role': 'llm', 'text': text, 'clz': ''}, ...old])
+
+            // text.choices.forEach(ch => {
+            //     addConversation((old) => [{'role': 'llm', 'text': ch.message.content, 'clz': ''}, ...old])
+            // })
         }).catch(function (error) {
-            console.error(error);
+            console.error(error)
         })
     }
 
     axios.request(options_trs).then(function (response) {
         const trs = response.data
-        addConversation((old) => [{'role': 'human', 'text': trs, 'clz': ''}, ...old])
+
+        addConversation((old) => [...old, {'role': 'human', 'text': trs, 'clz': ''}])
+        addConversation((old) => [...old, {'role': 'llm', 'text': '>', 'clz': ''}])
+        
         request_llama(trs)
     }).catch(function (error) {
-        console.error(error);
+        console.error(error)
     })
 
 

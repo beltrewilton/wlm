@@ -54,8 +54,8 @@ def text_to_audio(llm_response, voice_base: str):
         m = Mimic3TTSPlugin(lang='en_US', config=config)
         sound_file = NamedTemporaryFile()
         # text: str = ' '.join([t['text'] for t in llm_response['choices']])
-        text: str =' '.join([t['message']['content'] for t in llm_response['choices']])
-        m.get_tts(text, sound_file.name)
+        # text: str =' '.join([t['message']['content'] for t in llm_response['choices']])
+        m.get_tts(llm_response, sound_file.name)
         return audio_to_base64(sound_file.name)
     except Exception as ex:
         print('###### ERROR HERE text_to_audio ', ex)
@@ -67,12 +67,13 @@ def text_to_audio(llm_response, voice_base: str):
 
 
 def say_hello(voice_base: str):
-    llm_response = {
-        'choices': [{
-           'message': { 'content': '<speak><s><prosody rate="10%">Ummmm</prosody></s><break time="1s" /> <s>let me check, please wait a couple of seconds</s></speak>' }
-        }]
-    }
-    return text_to_audio(llm_response, voice_base)
+    # llm_response = {
+    #     'choices': [{
+    #        'message': { 'content': '<speak><s><prosody rate="10%">Ummmm</prosody></s><break time="1s" /> <s>let me check, please wait a couple of seconds</s></speak>' }
+    #     }]
+    # }
+    text: str = '<speak><s><prosody rate="10%">Ummmm</prosody></s><break time="1s" /> <s>let me check, please wait a couple of seconds</s></speak>'
+    return text_to_audio(text, voice_base)
 
 
 if __name__ == "__main__":
