@@ -4,8 +4,8 @@ import axios from "axios";
 
 export const streamWAV = (wavBuffer, addConversation, setMimicAudio, setStr, __uuid) => {
     let waitaudio;
-    // const HOST = document.location.href
-    const HOST = 'https://localhost:8770/'
+    const HOST = document.location.href
+    // const HOST = 'https://localhost:8770/'
     const msg = {
         'wavBuffer': wavBuffer
     }

@@ -25,9 +25,10 @@ export const App = () => {
   })
 
   useEffect(() => {
+    const HOST = document.location.host
     let __text = undefined
     const idxs = []
-    var ws = new WebSocket(`wss://localhost:8770/core/ws/${__uuid}`)
+    var ws = new WebSocket(`wss://${HOST}/core/ws/${__uuid}`)
     ws.onmessage = function(event) {
         const data = JSON.parse(event.data)
         if (data.sharable != undefined) {
