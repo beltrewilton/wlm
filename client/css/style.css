@@ -439,7 +439,8 @@ body {
       width: 100%;
     }
     .bl {
-      line-height: 4vw;
+      line-height: 6vw;
+      font-size: 27px !important;
       width: 100%;
     }
     .rainbow-container {
